@@ -31,6 +31,8 @@ int main() {
   Person p2{firstname, lastname, 0L};
   Person p3{"Mueller"_first, "Mueller"_last, 0L};
 
+  std::cout << p3 << std::endl;
+
   test123();
 
   return 0;
