@@ -1,35 +1,42 @@
 #include "Date.h"
 
-Date::Date(int tag, int monat, int jahr) :
-  m_tag(tag), m_monat(monat), m_jahr(jahr) {
+namespace FProg {
 
-}
+  Date::Date(Day day, Month month, Year year) :
+    m_day(day.value()), m_month(month.value()),
+    m_year(year.value()), m_duration(0L) {
+  }
 
-int Date::tag() const {
-  return m_tag;
-}
+  int Date::day() const {
+    return m_day;
+  }
 
-int Date::monat() const {
-  return m_monat;
-}
+  int Date::month() const {
+    return m_month;
+  }
 
-int Date::jahr() const {
-  return m_jahr;
-}
+  int Date::year() const {
+    return m_year;
+  }
 
-long long int Date::duration() const {
-  return m_duration;
-}
+  long long int Date::duration() const {
+    return m_duration;
+  }
 
-void Date::tag(int tag) {
-  m_tag = tag;
-}
-void Date::monat(int monat) {
-  m_monat = monat;
-}
-void Date::jahr(int jahr) {
-  m_jahr = jahr;
-}
-void Date::duration(long long int duration) {
-  m_duration = duration;
+  void Date::day(int day) {
+    m_day = day;
+  }
+
+  void Date::month(int month) {
+    m_month = month;
+  }
+
+  void Date::year(int year) {
+    m_year = year;
+  }
+
+  void Date::duration(long long int duration) {
+    m_duration = duration;
+  }
+
 }
