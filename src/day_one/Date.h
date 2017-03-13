@@ -2,6 +2,9 @@
 
 class Date {
 public:
+  // Mit eigenen Datentypen
+  // sonst gibt es Probleme mit der Reihenfolge
+  // Vllt UDL benutzen (User-defined-literals)
   Date(int tag, int monat, int jahr);
   int tag() const;
   int monat() const;
