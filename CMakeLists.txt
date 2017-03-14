@@ -14,3 +14,7 @@ add_executable(testing_exe ${SOURCES_TESTING})
 include_directories("src/day_one/")
 file(GLOB SOURCES_DAY_ONE "src/day_one/*cpp")
 add_executable(day_one_exe ${SOURCES_DAY_ONE})
+
+include_directories("src/day_two/")
+file(GLOB SOURCES_DAY_TWO "src/day_two/*cpp")
+add_executable(day_two_exe ${SOURCES_DAY_TWO})
