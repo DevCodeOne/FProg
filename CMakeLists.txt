@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.6.2)
 set(CMAKE_CXX_FLAGS_DEBUG "-DDEBUG")
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} ${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
 set(EXECUTABLE_OUTPUT_PATH build)
-# Kompiliere mit Standard 17
+# Kompiliere mit Standard 14
 add_definitions(-std=c++14)
 
 include_directories("src/testing/")
@@ -22,3 +22,7 @@ add_executable(day_two_exe ${SOURCES_DAY_TWO})
 include_directories("src/day_three/")
 file(GLOB SOURCES_DAY_THREE "src/day_three/*cpp")
 add_executable(day_three_exe ${SOURCES_DAY_THREE})
+
+include_directories("src/day_four/")
+file(GLOB SOURCES_DAY_FOUR "src/day_four/*cpp")
+add_executable(day_four_exe ${SOURCES_DAY_FOUR})
