@@ -35,7 +35,7 @@ int main() {
   Person p3{"Mueller"_first, "Mueller"_last, d};
   Person p4{"Typ"_first, "Last"_last, d};
   Person p5{"Typ2"_first, "Last"_last, d};
-  PersonHeapArray array;
+  HeapArray<Person> array;
   array.push_back(p);
   array.push_back(p2);
   array.push_back(p3);
@@ -46,7 +46,7 @@ int main() {
     std::cout << array[i] << std::endl;
   }
 
-  std::cout << array.size() << " / " << array.capacity() << std::endl;
+  std::cout << array << std::endl;
 
   StringSerializer serializer;
   p.serialize(serializer);
@@ -65,5 +65,13 @@ int main() {
   std::cout << intervall2 << std::endl;
   std::cout << intervall3 << std::endl;
 
+  HeapArray<int> int_array{0, 1, 2, 3};
+  for (decltype(int_array)::size_type i = 0;
+       i < int_array.size(); i++)
+    std::cout << int_array[i] << " ";
+
+  std::cout << int_array << std::endl;
+
+  // ppc2100 lesen
   return 0;
 }
