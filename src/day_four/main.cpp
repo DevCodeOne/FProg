@@ -70,7 +70,17 @@ int main() {
        i < int_array.size(); i++)
     std::cout << int_array[i] << " ";
 
+  std::cout << std::endl;
+
+  for (const auto &ele : int_array) {
+    std::cout << ele << std::endl;
+  }
+
   std::cout << int_array << std::endl;
+
+  // Benutze std::begin ist generischer, denn ein Typ
+  // könnte die Elementfunktion nicht implementieren
+  // std::fill(std::begin(int_array), std::begin(int_array), 42);
 
   // ppc2100 lesen
   return 0;

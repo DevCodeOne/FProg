@@ -18,6 +18,19 @@ namespace FProg {
 
     using size_type = size_t;
 
+    class HeapArrayIterator final {
+
+    public:
+      explicit HeapArrayIterator(T *ptr);
+      HeapArrayIterator &operator++();
+      T &operator*();
+      bool operator==(const HeapArrayIterator &rhs);
+      bool operator!=(const HeapArrayIterator &rhs);
+    private:
+      T *m_ptr = nullptr;
+
+    };
+
     HeapArray();
     HeapArray(const std::initializer_list<T> &elements);
     explicit HeapArray(size_t capacity);
@@ -29,14 +42,16 @@ namespace FProg {
     void reserve(size_t new_capacity);
     void swap(HeapArray &other) noexcept;
     void push_back(const T &element);
-    inline size_t size() const;
-    inline size_t capacity() const;
+    HeapArrayIterator begin() const;
+    HeapArrayIterator end() const;
+    size_t size() const;
+    size_t capacity() const;
     T &operator[](size_t index) const;
+
   private:
     size_t m_size = 0;
     size_t m_capacity = 0;
     std::unique_ptr<T[]> m_data;
-
   };
 
   template<typename T>
@@ -136,14 +151,65 @@ namespace FProg {
   }
 
   template<typename T>
+  typename HeapArray<T>::HeapArrayIterator HeapArray<T>::begin() const {
+    return typename HeapArray<T>::HeapArrayIterator(m_data.get());
+  }
+
+  template<typename T>
+  typename HeapArray<T>::HeapArrayIterator HeapArray<T>::end() const {
+    return typename HeapArray<T>::HeapArrayIterator(m_data.get() + m_size);
+  }
+
+  template<typename T>
   void HeapArray<T>::swap(HeapArray<T> &other) noexcept {
     std::swap(m_size, other.m_size);
     std::swap(m_capacity, other.m_capacity);
     std::swap(m_data, other.m_data);
   }
+
+  template<typename T>
+  HeapArray<T>::HeapArrayIterator::HeapArrayIterator(T *ptr) : m_ptr(ptr) {
+
+  }
+
+  template<typename T>
+  typename HeapArray<T>::HeapArrayIterator &HeapArray<T>::HeapArrayIterator::operator++() {
+    ++m_ptr;
+
+    return *this;
+  }
+
+  template<typename T>
+  T &HeapArray<T>::HeapArrayIterator::operator*() {
+    return *m_ptr;
+  }
+
+  template<typename T>
+  bool HeapArray<T>::HeapArrayIterator::operator==(const typename HeapArray<T>::HeapArrayIterator &rhs) {
+    return this->m_ptr == rhs.m_ptr;
+  }
+
+  template<typename T>
+  bool HeapArray<T>::HeapArrayIterator::operator!=(const typename HeapArray<T>::HeapArrayIterator &rhs) {
+    return this->m_ptr != rhs.m_ptr;
+  }
 }
 
 using PersonHeapArray = FProg::HeapArray<FProg::Person>;
+
+// Geht nicht da das T eines abgeleiteten Typs nicht direkt abgeleitet werden kann,
+// deswegen muss es zu einer Elementfunktion umgeschrieben werden
+//template<typename T>
+//bool operator==(const typename FProg::HeapArray<T>::HeapArrayIterator &it1,
+//                const typename FProg::HeapArray<T>::HeapArrayIterator &it2) {
+//  return it1.m_ptr == it2.m_ptr;
+//}
+
+//template<typename T>
+//bool operator!=(const FProg::HeapArrayIterator<T> &it1,
+//                const FProg::HeapArrayIterator<T> &it2) {
+//  return !(it1 == it2);
+//}
 
 template<typename T>
 inline void swap(FProg::HeapArray<T> &array1,
