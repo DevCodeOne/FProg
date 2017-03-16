@@ -48,8 +48,7 @@ namespace FProg {
     // Firstname wird gemoved in den Parameter firstname, wenn ein temporäres Objekt
     // benutzt wird also Move-Konstruktor von Firstname wird benutzt.
     // Dann wird der Parameter firstname in m_firstname gemoved
-    inline Person() : m_birthday(Day(0), Month(0), Year(0)),
-                      m_valid(false) {
+    inline Person() : m_birthday(Day(0), Month(0), Year(0)) {
     }
     Person(const Firstname firstname, const Lastname lastname,
            const Date &birthday);
@@ -60,11 +59,11 @@ namespace FProg {
     const Date &birthday() const;
 
     inline bool valid() const {
-      return m_valid;
+      return (m_firstname.size() != 0)
+        && (m_lastname.size() != 0);
     }
 
     Serializer &serialize(Serializer &serializer) const;
-    // Aufgabe : Deserializer mit optional schreiben
     static std::experimental::optional<Person>
     deserialize(Deserializer &deserializer);
 
@@ -72,7 +71,6 @@ namespace FProg {
     std::string m_firstname;
     std::string m_lastname;
     Date m_birthday;
-    bool m_valid = true;
   };
 
 }

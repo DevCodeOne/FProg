@@ -30,7 +30,7 @@ namespace FProg {
                  const Date &birthday)
     : m_firstname(std::move(firstname.value())),
       m_lastname(std::move(lastname.value())),
-      m_birthday(birthday), m_valid(true) {
+      m_birthday(birthday) {
 
   }
 
@@ -54,6 +54,32 @@ namespace FProg {
                      value(to_string(m_birthday)));
     serializer.end();
     return serializer;
+  }
+
+  std::experimental::optional<Person> Person::deserialize(Deserializer &deserializer) {
+    Person person;
+
+    if (!deserializer.start("Person"))
+      return std::experimental::optional<Person>{};
+
+    for (int i = 0; i < 3; i++) {
+      auto attrib = deserializer.read();
+
+      if (!attrib)
+        return std::experimental::optional<Person>{};
+
+      if (attrib.name() == "Firstname")
+        person.firstname(attrib.value());
+      else if (attrib.name() == "Lastname")
+        person.lastname(attrib.value());
+      else if (attrib.name() == "Birthday")
+        ; // TODO Datum einlesen
+    }
+
+    if (!deserializer.end())
+      return std::experimental::optional<Person>{};
+
+    return std::experimental::optional<Person>{person};
   }
 
   const std::string &Person::firstname() const {
