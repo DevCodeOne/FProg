@@ -26,3 +26,7 @@ add_executable(day_three_exe ${SOURCES_DAY_THREE})
 include_directories("src/day_four/")
 file(GLOB SOURCES_DAY_FOUR "src/day_four/*cpp")
 add_executable(day_four_exe ${SOURCES_DAY_FOUR})
+
+include_directories("src/day_five/")
+file(GLOB SOURCES_DAY_FIVE "src/day_five/*cpp")
+add_executable(day_five_exe ${SOURCES_DAY_FIVE})
