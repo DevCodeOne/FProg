@@ -4,6 +4,8 @@
 #include <cassert>
 
 #include <memory>
+#include <algorithm>
+#include <iterator>
 #include <utility>
 #include <iostream>
 #include <initializer_list>
@@ -17,10 +19,13 @@ namespace FProg {
   public:
 
     using size_type = size_t;
+    using value_type = T;
 
-    class HeapArrayIterator final {
+    class HeapArrayIterator final
+      : public std::iterator<std::forward_iterator_tag, T> {
 
     public:
+
       explicit HeapArrayIterator(T *ptr);
       HeapArrayIterator &operator++();
       T &operator*();
@@ -58,8 +63,7 @@ namespace FProg {
   HeapArray<T>::HeapArray(const std::initializer_list<T> &elements) {
     reserve(elements.size());
 
-    for (auto element : elements)
-      push_back(element);
+    std::copy(std::begin(elements), std::end(elements), std::back_inserter(*this));
   }
 
   template<typename T>
@@ -78,8 +82,7 @@ namespace FProg {
       m_capacity(array.capacity()),
       m_data(std::make_unique<T[]>(m_capacity)) {
 
-    for (size_t i = 0; i < m_size; i++)
-      m_data[i] = array.m_data[i];
+    std::copy(std::begin(array), std::end(array), std::begin(*this));
   }
 
   // Copy-Swap Idiom
@@ -96,8 +99,7 @@ namespace FProg {
 
     auto new_data = std::make_unique<T[]>(new_capacity);
 
-    for (size_t i = 0; i < m_size; i++)
-      new_data[i] = m_data[i];
+    std::copy(std::begin(*this), std::end(*this), new_data.get());
 
     m_data = std::move(new_data);
     m_capacity = new_capacity;

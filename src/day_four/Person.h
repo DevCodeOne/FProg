@@ -2,12 +2,14 @@
 
 #include <string>
 #include <iostream>
+#include <experimental/optional>
 
 #include <ctime>
 #include <cstddef>
 
 #include "Date.h"
 #include "Serializer.h"
+#include "Deserializer.h"
 
 namespace FProg {
   class Firstname final {
@@ -62,6 +64,10 @@ namespace FProg {
     }
 
     Serializer &serialize(Serializer &serializer) const;
+    // Aufgabe : Deserializer mit optional schreiben
+    static std::experimental::optional<Person>
+    deserialize(Deserializer &deserializer);
+
   private:
     std::string m_firstname;
     std::string m_lastname;

@@ -32,4 +32,9 @@ namespace FProg {
     return m_value;
   }
 
+  std::ostream &operator<<(std::ostream &os,
+                           const FProg::StringSerializer &serializer) {
+    return os << serializer.value();
+  }
+
 }
