@@ -30,9 +30,15 @@ int main(int argc, char *argv[]) {
       const std::string &firstname = arguments[1];
       const std::string &lastname = arguments[2];
 
-      auto predicate = [&firstname, &lastname](const Person &p){
-        return p.firstname() == firstname && p.lastname() == lastname;
-      };
+      // Verlagere Suche in Person, weil das Predikat sonst abhängig von
+      // der Implementierung ist, also soll Person Predikate liefern, mit
+      // der man suchen kann
+      //auto predicate = [&firstname, &lastname](const Person &p){
+      //  return p.firstname() == firstname && p.lastname() == lastname;
+      //};
+
+      auto predicate = Person::search_names(Firstname(firstname),
+                                            Lastname(lastname));
 
       auto results = database.search(predicate);
       std::copy(std::begin(results), std::end(results), std::ostream_iterator<Person>(std::cout, "\n"));

@@ -67,6 +67,12 @@ namespace FProg {
     static std::experimental::optional<Person>
     deserialize(Deserializer &deserializer);
 
+    static auto search_names(const Firstname &firstname, const Lastname &lastname) {
+      return [firstname, lastname](const Person &person) {
+        return firstname.value() == person.firstname() && lastname.value() == person.lastname();
+      };
+    }
+
   private:
     std::string m_firstname;
     std::string m_lastname;

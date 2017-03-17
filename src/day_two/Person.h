@@ -54,7 +54,8 @@ namespace FProg {
     const std::string &lastname() const;
     const Date &birthday() const;
     Serializer &serialize(Serializer &serializer) const;
-  private:
+
+    private:
     std::string m_firstname;
     std::string m_lastname;
     Date m_birthday;
