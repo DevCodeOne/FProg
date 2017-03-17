@@ -3,6 +3,7 @@
 #include <string>
 
 #include "Attribute.h"
+#include "Deserializer.h"
 
 namespace FProg {
 
@@ -22,7 +23,6 @@ namespace FProg {
     virtual void start(const std::string &start) override;
     virtual void write(const AttributeValue &attribvalue) override;
     virtual void end() override;
-
     const std::string value() const;
   private:
     bool m_is_started = false;
