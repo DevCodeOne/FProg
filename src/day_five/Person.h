@@ -73,26 +73,26 @@ namespace FProg {
     Date m_birthday;
   };
 
-}
+  inline std::ostream &operator<<(std::ostream &os, const FProg::Person &person) {
+    return os << person.firstname() << " " << person.lastname();
+  }
 
-inline FProg::Firstname operator"" _first(const char *str, size_t) {
-  return FProg::Firstname(str);
-}
+  inline FProg::Firstname operator"" _first(const char *str, size_t) {
+    return FProg::Firstname(str);
+  }
 
-inline std::ostream &operator<<(std::ostream &os,
-                                const FProg::Firstname &firstname) {
-  return os << firstname.value();
-}
+  inline std::ostream &operator<<(std::ostream &os,
+                                  const FProg::Firstname &firstname) {
+    return os << firstname.value();
+  }
 
-inline FProg::Lastname operator"" _last(const char *str, size_t) {
-  return FProg::Lastname(str);
-}
+  inline FProg::Lastname operator"" _last(const char *str, size_t) {
+    return FProg::Lastname(str);
+  }
 
-inline std::ostream &operator<<(std::ostream &os,
-                                const FProg::Lastname &lastname) {
-  return os << lastname.value();
-}
+  inline std::ostream &operator<<(std::ostream &os,
+                                  const FProg::Lastname &lastname) {
+    return os << lastname.value();
+  }
 
-inline std::ostream &operator<<(std::ostream &os, const FProg::Person &person) {
-  return os << person.firstname() << " " << person.lastname();
 }

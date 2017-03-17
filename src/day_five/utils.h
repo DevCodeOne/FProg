@@ -42,16 +42,17 @@ namespace FProg {
     return Intervall<std::string>{val2, val1};
   }
 
+  template<typename T>
+  std::ostream &operator<<(std::ostream &os, const FProg::Intervall<T> &intervall) {
+    return os << "[ " << intervall.m_min << ", " << intervall.m_max << " ]";
+  }
+
+  /*
+    template<typename T>
+    T Intervall<T>::mean() const {
+    return (m_min + m_max) / 2.0;
+    }
+  */
+
 }
 
-template<typename T>
-std::ostream &operator<<(std::ostream &os, const FProg::Intervall<T> &intervall) {
-  return os << "[ " << intervall.m_min << ", " << intervall.m_max << " ]";
-}
-
-/*
-template<typename T>
-T Intervall<T>::mean() const {
-  return (m_min + m_max) / 2.0;
-}
-*/

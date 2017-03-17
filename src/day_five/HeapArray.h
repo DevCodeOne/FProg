@@ -195,31 +195,32 @@ namespace FProg {
   bool HeapArray<T>::HeapArrayIterator::operator!=(const typename HeapArray<T>::HeapArrayIterator &rhs) {
     return this->m_ptr != rhs.m_ptr;
   }
+
+  using PersonHeapArray = FProg::HeapArray<FProg::Person>;
+
+  // Geht nicht da das T eines abgeleiteten Typs nicht direkt abgeleitet werden kann,
+  // deswegen muss es zu einer Elementfunktion umgeschrieben werden
+  //template<typename T>
+  //bool operator==(const typename FProg::HeapArray<T>::HeapArrayIterator &it1,
+  //                const typename FProg::HeapArray<T>::HeapArrayIterator &it2) {
+  //  return it1.m_ptr == it2.m_ptr;
+  //}
+
+  //template<typename T>
+  //bool operator!=(const FProg::HeapArrayIterator<T> &it1,
+  //                const FProg::HeapArrayIterator<T> &it2) {
+  //  return !(it1 == it2);
+  //}
+
+  template<typename T>
+  inline void swap(FProg::HeapArray<T> &array1,
+                   FProg::HeapArray<T> &array2) noexcept {
+    array1.swap(array2);
+  }
+
+  template<typename T>
+  std::ostream &operator<<(std::ostream &os, const FProg::HeapArray<T> &array) {
+    return os << "[ " << array.size() << " / " << array.capacity() << " ]";
+  }
 }
 
-using PersonHeapArray = FProg::HeapArray<FProg::Person>;
-
-// Geht nicht da das T eines abgeleiteten Typs nicht direkt abgeleitet werden kann,
-// deswegen muss es zu einer Elementfunktion umgeschrieben werden
-//template<typename T>
-//bool operator==(const typename FProg::HeapArray<T>::HeapArrayIterator &it1,
-//                const typename FProg::HeapArray<T>::HeapArrayIterator &it2) {
-//  return it1.m_ptr == it2.m_ptr;
-//}
-
-//template<typename T>
-//bool operator!=(const FProg::HeapArrayIterator<T> &it1,
-//                const FProg::HeapArrayIterator<T> &it2) {
-//  return !(it1 == it2);
-//}
-
-template<typename T>
-inline void swap(FProg::HeapArray<T> &array1,
-                 FProg::HeapArray<T> &array2) noexcept {
-  array1.swap(array2);
-}
-
-template<typename T>
-std::ostream &operator<<(std::ostream &os, const FProg::HeapArray<T> &array) {
-  return os << "[ " << array.size() << " / " << array.capacity() << " ]";
-}

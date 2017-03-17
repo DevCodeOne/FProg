@@ -56,14 +56,14 @@ namespace FProg {
     int m_day, m_month, m_year;
   };
 
+  inline std::ostream &operator<<(std::ostream &os, const FProg::Date &date) {
+    return os << date.day() << "/" << date.month() << "/" << date.year();
+  }
+
+  inline std::string to_string(const FProg::Date &date) {
+    return std::to_string(date.day()) + "/" + std::to_string(date.month()) +
+      "/" + std::to_string(date.year());
+
+  }
 }
 
-inline std::ostream &operator<<(std::ostream &os, const FProg::Date &date) {
-  return os << date.day() << "/" << date.month() << "/" << date.year();
-}
-
-inline std::string to_string(const FProg::Date &date) {
-  return std::to_string(date.day()) + "/" + std::to_string(date.month()) +
-    "/" + std::to_string(date.year());
-
-}

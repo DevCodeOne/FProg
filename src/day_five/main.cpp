@@ -35,8 +35,7 @@ int main(int argc, char *argv[]) {
       };
 
       auto results = database.search(predicate);
-      for (const auto &element : results)
-        std::cout << element << std::endl;
+      std::copy(std::begin(results), std::end(results), std::ostream_iterator<Person>(std::cout, "\n"));
     }
   }
 

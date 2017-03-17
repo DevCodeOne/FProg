@@ -43,30 +43,30 @@ namespace FProg {
     std::string m_value;
   };
 
-}
+  inline std::ostream &operator<<(std::ostream &os,
+                                  const FProg::AttributeValue &value) {
+    return os << static_cast<std::string>(value);
+  }
 
-inline std::ostream &operator<<(std::ostream &os,
-                               const FProg::AttributeValue &value) {
-  return os << static_cast<std::string>(value);
-}
+  inline std::istream &operator>>(std::istream &is,
+                                  FProg::AttributeValue &value) {
+    std::string in;
 
-inline std::istream &operator>>(std::istream &is,
-                                FProg::AttributeValue &value) {
-  std::string in;
+    is >> in;
+    value.name(in);
 
-  is >> in;
-  value.name(in);
+    is >> in;
 
-  is >> in;
+    if (in != "=") {
+      value.name("");
 
-  if (in != "=") {
-    value.name("");
+      return is;
+    }
+
+    is >> in;
+    value.value(in);
 
     return is;
   }
-
-  is >> in;
-  value.value(in);
-
-  return is;
 }
+
